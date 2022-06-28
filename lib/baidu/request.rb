@@ -1,6 +1,5 @@
 require 'net/http'
 require 'digest'
-require 'sysinfo'
 
 module Baidu
 	# 百度云推送API封装类
@@ -25,7 +24,6 @@ module Baidu
 		def initialize(apisecret,options = {})
 			@apisecret = apisecret
 			@options = {use_ssl: false}.merge(options)
-			@sysinfo = SysInfo.new
 		end
 
 		def start(resource,method,params={})
@@ -47,7 +45,7 @@ module Baidu
 				req.set_form_data(params)
 			end
 			req['Content-Type'] = "application/x-www-form-urlencoded;charset=utf-8"
-			req['User-Agent'] = "BCCS_SDK/3.0 (#{@sysinfo.os},#{@sysinfo.arch},#{@sysinfo.impl}) Ruby/#{RUBY_VERSION} (Baidu Push Server SDK V3.0.0)"
+			req['User-Agent'] = "BCCS_SDK/3.0 (unix,x86_64,linux) Ruby/#{RUBY_VERSION} (Baidu Push Server SDK V3.0.0)"
 			response = Net::HTTP.start(uri.host,uri.port,use_ssl: @options[:use_ssl]){|http| http.request(req)}
 			http_response_to_baidu_response(response)
 		end

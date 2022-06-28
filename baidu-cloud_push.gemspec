@@ -10,6 +10,5 @@ Gem::Specification.new do |s|
 	s.homepage     =
 		'https://github.com/liqites/baidu-cloud_push'
 	s.license      = 'MIT'
-	s.add_runtime_dependency 'sysinfo'
 	s.required_ruby_version = '>= 1.9.3'
 end
